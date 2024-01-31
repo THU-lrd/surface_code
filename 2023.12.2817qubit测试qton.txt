@@ -1,0 +1,82 @@
+Windows PowerShell
+版权所有（C） Microsoft Corporation。保留所有权利。
+
+安装最新的 PowerShell，了解新功能和改进！https://aka.ms/PSWindows
+
+PS D:\desktop\project\surface code> ipython
+ipython : 无法将“ipython”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路
+径正确，然后再试一次。
+所在位置 行:1 字符: 1
++ ipython
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (ipython:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS D:\desktop\project\surface code> python
+Python 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a+b=1
+  File "<stdin>", line 1
+    a+b=1
+    ^^^
+SyntaxError: cannot assign to expression here. Maybe you meant '==' instead of '='?
+>>> from qton import Qcircuit
+>>> Qcircuit
+<function Qcircuit at 0x000001CEC882BE20>
+>>> qc = Qcircuit(3, backend = 'statevector')
+>>> qc
+<qton.simulators.statevector.Qstatevector object at 0x000001CEC8640110>
+>>> qc.num_qubits
+3
+>>> qc.backend
+'statevector'
+>>> qc.state
+array([1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j])
+>>> qc.x(0)
+>>> qc.state
+array([0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j])
+>>> qc.x([1, 2])
+>>> qc.x([0, 1, 2])
+>>> qc.state
+array([1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j])
+>>> qc.h(0)
+>>> qc.cx([1, 2])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: _Basic_qcircuit_.cx() missing 1 required positional argument: 'qubits2'
+>>> qc.cx(0, [1, 2])
+>>> qc.state
+array([0.70710678+0.j, 0.        +0.j, 0.        +0.j, 0.        +0.j,
+       0.        +0.j, 0.        +0.j, 0.        +0.j, 0.70710678+0.j])
+>>> qc.measure(0)
+0
+>>> qc.state
+array([1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j])
+>>> qc.measure(0)
+0
+>>> bit = qc.measure(0)
+>>> bit
+0
+>>> qc.h(0)
+>>> qc.cx(0, [1, 2])
+>>> qc.sample(shots = 1000, output = 'counts')
+D:\developtools\Python\Lib\random.py:510: ComplexWarning: Casting complex values to real discards the imaginary part
+  if not _isfinite(total):
+{'000': 529, '111': 471}
+>>> qc.sample(shots = 1000, output = 'statistic')
+array([496,   0,   0,   0,   0,   0,   0, 504])
+>>> help(qc.x)
+Help on method x in module qton.simulators._basic_qcircuit_:
+
+x(qubits) method of qton.simulators.statevector.Qstatevector instance
+    Pauli-X gate.
+
+    -In(1):
+        1. qubits --- qubit indices.
+            type: int; list, int
+
+    -Influenced(1):
+        1. self.state --- circuit state representation.
+            type: numpy.ndarray, complex
+
+>>>
